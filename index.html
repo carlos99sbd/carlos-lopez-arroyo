@@ -359,7 +359,7 @@
 
       <div class="gap-note">
         <div class="gap-note-label">The obvious question, answered upfront</div>
-        <p>My email signature has always said <strong>Technical Lead</strong>, not Product Manager. But the work behind the title has been product work: I've written the business case, run the discovery, owned the roadmap, argued the trade-offs with a skeptical CEO, and decided what <em>not</em> to build — eleven times, documented, in the last year alone.</p>
+        <p>My email signature has always said <strong>Technical Lead</strong>, not Product Manager. But the work behind the title has been product work: I've written the business case, run the discovery, owned the roadmap, argued the trade-offs with stakeholders who needed convincing, and decided what <em>not</em> to build — fourteen times, documented, over the last year.</p>
       </div>
     </section>
 
@@ -499,27 +499,27 @@
       <div class="case-card">
         <div class="stage-row"><span class="stage-badge protect">Protect</span><span class="stage-arrow">integrity of the business number</span></div>
         <div class="case-top">
-          <div class="case-title">A price that was never decided, hardcoded in twelve places</div>
+          <div class="case-title">A pricing model that had outgrown its own codebase</div>
           <div class="case-domain">Data Governance</div>
         </div>
 
         <div class="case-block">
           <div class="case-label">Challenge</div>
-          <div class="case-text">A routine question — "is this price right?" — surfaced that the platform's tiering was written literally into 12 points across 6 files, including the commercial PDF sent to clients. The top-tier price had, in fact, never been decided by anyone; the code had simply been asserting it to customers for months.</div>
+          <div class="case-text">A routine question about a price surfaced that the platform's tiering was written literally into 12 points across 6 files, including the commercial PDF sent to clients — a scattered, organically-grown source of truth that had never been a problem until it quietly became one.</div>
         </div>
         <div class="case-block">
           <div class="case-label">Approach</div>
-          <div class="case-text">Traced every literal to its consumer rather than just grepping for the string — which is how a second, worse bug surfaced: a silent fallback was counting any client without an assigned plan as full mid-tier revenue in the admin's live MRR dashboard. Consolidated pricing into a single source read by both backend and frontend, and made "no valid plan" a value the UI is structurally required to display rather than quietly absorb.</div>
+          <div class="case-text">Traced every literal to its consumer rather than just grepping for the string, which is how a second, subtler bug surfaced in how the admin dashboard categorised clients without a fully assigned plan. Consolidated pricing into a single source read by both backend and frontend, and made "no valid plan" a value the UI is structurally required to display rather than quietly absorb.</div>
         </div>
 
         <div class="metric-box">
           <div class="metric"><b>12</b> hardcoded price points → <b>1</b> source of truth</div>
-          <div class="metric">Silent MRR inflation caught: <b>7.7×</b> overstated in one real scenario</div>
+          <div class="metric">Regression tests added <b>before</b> the fix was marked done, not after</div>
         </div>
 
         <div class="case-block">
           <div class="case-label">Outcome</div>
-          <div class="case-text">Zero hardcoded prices remain, and the business dashboard stopped reporting revenue from clients who weren't generating it. Same-day close, with regression tests written before the initiative was marked done.</div>
+          <div class="case-text">Zero hardcoded prices remain, and the admin dashboard now reflects each client's actual plan status instead of assuming one. Closed the same day it was found.</div>
         </div>
         <div class="case-block">
           <div class="case-label">What I'd do differently</div>
@@ -537,13 +537,13 @@
       <div class="case-card">
         <div class="stage-row"><span class="stage-badge scale">Scale</span><span class="stage-arrow">investment case under scrutiny</span></div>
         <div class="case-top">
-          <div class="case-title">Winning an infrastructure investment from a skeptical CEO</div>
+          <div class="case-title">Making the case to build infrastructure instead of renting it</div>
           <div class="case-domain">Platform / Unit Economics</div>
         </div>
 
         <div class="case-block">
           <div class="case-label">Challenge</div>
-          <div class="case-text">The CEO doubted the return on building owned infrastructure (Kubernetes + Terraform) instead of staying on managed hosting. Effort, cost, and value were all under question — and the honest answer to "is it cheaper?" was no.</div>
+          <div class="case-text">Owned infrastructure (Kubernetes + Terraform) needed to earn its place over managed hosting. Effort, cost, and value all had to be argued for — and the honest answer to "is it cheaper on day one?" was no.</div>
         </div>
         <div class="case-block">
           <div class="case-label">Approach</div>
@@ -561,12 +561,12 @@
         </div>
         <div class="case-block">
           <div class="case-label">What I'd do differently</div>
-          <div class="case-text">Effort tracking formally belonged to another manager and never got picked up. I owned the architecture and assumed the reporting would follow; the estimate slipped and the CEO had to ask for status rather than receive it. Real ownership includes giving stakeholders visibility before they come looking for it.</div>
+          <div class="case-text">I owned the architecture and assumed progress reporting would follow naturally; it didn't, and the estimate slipped further than it should have before anyone raised it. Real ownership includes surfacing status before stakeholders come looking for it.</div>
         </div>
 
         <div class="titleblock">
           <div class="tb-cell"><div class="tb-label">Domain</div><div class="tb-value">Infrastructure</div></div>
-          <div class="tb-cell"><div class="tb-label">Stakeholder</div><div class="tb-value">CEO (internal)</div></div>
+          <div class="tb-cell"><div class="tb-label">Stakeholder</div><div class="tb-value">Internal, exec sponsor</div></div>
           <div class="tb-cell"><div class="tb-label">Status</div><div class="tb-value">Adopted, in production</div></div>
         </div>
       </div>
@@ -626,15 +626,15 @@
         </div>
         <div class="also-row">
           <div>
-            <div class="also-name">Kubernetes provisioning — sealed secrets</div>
-            <div class="also-desc">A systems engineer flagged that the platform was pushing unsealed secret manifests to version control while provisioning client instances. Read the code path instead of defending the design, confirmed the objection was right, and redrew the trust boundary between the two systems.</div>
+            <div class="also-name">Kubernetes provisioning — hardened secret handling</div>
+            <div class="also-desc">Strengthened how the platform handles sensitive configuration while provisioning new client instances, after a security review from a systems stakeholder. Read the exact code path rather than defending the existing design, and redrew the trust boundary between the two systems.</div>
           </div>
           <div class="also-tag">Security / Trust boundary</div>
         </div>
         <div class="also-row">
           <div>
             <div class="also-name">Sector catalog — from schema enum to living data</div>
-            <div class="also-desc">Presented as a missing CRUD screen; was actually a database enum with per-sector business logic duplicated across six places and a silent fallback that gave clients a generic score dressed up as a tailored one.</div>
+            <div class="also-desc">Presented as a missing CRUD screen; was actually a database enum with per-sector business logic duplicated across six places, limiting how personalised each client's experience could really be. Rebuilt as a configurable catalog instead.</div>
           </div>
           <div class="also-tag">Systems thinking</div>
         </div>
@@ -664,12 +664,12 @@
       <div class="people-table">
         <div class="person-row">
           <div>
-            <div class="person-who">The CEO</div>
+            <div class="person-who">An executive sponsor</div>
             <div class="person-ctx">Budget holder</div>
           </div>
           <div>
-            <div class="person-tension">Doubted the ROI of building our own infrastructure.</div>
-            <div class="person-did">Base cost was genuinely a wash, so I stopped arguing price and rebuilt the case on unit economics of scaling. Winning required conceding the point he was right about first.</div>
+            <div class="person-tension">Needed to see the unit economics before greenlighting a build-vs-buy call.</div>
+            <div class="person-did">Base cost was genuinely a wash, so I stopped arguing price and rebuilt the case on the economics of scaling instead. Winning required conceding the point he was right about first.</div>
           </div>
         </div>
 
@@ -679,7 +679,7 @@
             <div class="person-ctx">Peer, another team</div>
           </div>
           <div>
-            <div class="person-tension">Refused to trust my provisioning flow over a security risk.</div>
+            <div class="person-tension">Raised a valid technical objection to a new provisioning workflow.</div>
             <div class="person-did">Went and read the exact code path rather than defending the design. He was right. Redesigned the trust boundary — losing the only committed technical stakeholder would have cost far more than being wrong.</div>
           </div>
         </div>
